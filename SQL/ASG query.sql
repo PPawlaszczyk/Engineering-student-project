@@ -8,9 +8,20 @@ add Id int not null IDenTITY(1,1) Primary Key
 
 select Nazwa_Strzelca, model_broni, Typ, minmalny_czas, sredni_czas,Data_utworzenia from Walhalla order by sredni_czas
 
-drop table walhalla
 
-select * from Walhalla
+ CREATE TABLE ASGGuns(ID integer Primary Key not null, GunModel nvarchar(50), GunType nvarchar(50), FPS tinyint, Capacity tinyint, PowerSource nvarchar(20));
+ create table ShooterCollection(ID integer Primary Key not null, ShooterName nvarchar(50), DateCrated date, IDGunModelFK int, FOREIGN KEY (IDGunModelFK) REFERENCES ASGGuns(ID));
+ create table Scores(ID integer Primary Key not null, ProgramMode nvarchar(50),MinTime decimal(9,2), AVGTime decimal(9,2), MaxTime decimal(9,2), IDShooterFK int, FOREIGN KEY (IDShooterFK) REFERENCES ShooterCollection(ID));
+
+ create table UserPermissions(ID integer Primary Key not null, UserName nvarchar(20), Password nvarchar(40), Permit nvarchar(20), SecurityLevel tinyint );
+  create table Users(ID integer Primary Key not null, FirstName nvarchar(20), Surname nvarchar(40),  IDUser int, FOREIGN KEY (IDUser) REFERENCES UserPermissions(ID));
+
+ drop table Scores
+drop table ShooterCollection
+drop table ASGGuns
+
+
+
 
 select * from Bronie_ASG
 
@@ -40,14 +51,6 @@ Insert INTO Walhalla VALUES('Terminator','M134 Minigun ','karabin maszynowy','20
 select model_broni from bronie_ASG
 select typ, FPS from bronie_ASG where model_broni='AK'
 
-select typ from bronie_ASG where id = 1
 
 
-//do testow
-CREATE TABLE Bron(Modek_Broni nvarchar(50))
-Insert INTO bron VALUES('ash');
 
-
-delete from Bronie_ASG where model_broni='fghj2';
-"drop table Bronie_ASG"
-//do testow
