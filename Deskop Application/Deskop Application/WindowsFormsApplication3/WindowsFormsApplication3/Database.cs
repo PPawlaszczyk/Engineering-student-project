@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public class Database
     {
         public SQLiteConnection conn;
-
         public Database()
         {
             conn = new SQLiteConnection("Data source=database.sqliteASG");
@@ -30,7 +29,7 @@ namespace WindowsFormsApplication3
         {
             //first
             conn.Open();
-            string sql = "CREATE TABLE ASGGuns(ID integer Primary Key not null, Model nvarchar(50), Type nvarchar(50), FPS tinyint, Capacity tinyint, PowerSource nvarchar(20));";
+            string sql = "CREATE TABLE ASGGuns(ID INTEGER PRIMARY KEY AUTOINCREMENT, Model nvarchar(30), Type nvarchar(30), FPS smallint, Capacity smallint, PowerSource nvarchar(30));";
             sql += "create table ShooterCollection(ID integer Primary Key not null, ShooterName nvarchar(50), DateCreated date, IDGunModelFK int, FOREIGN KEY (IDGunModelFK) REFERENCES ASGGuns(ID));";
             sql += "create table Scores(ID integer Primary Key not null, ProgramMode nvarchar(50),MinTime decimal(9,2), AVGTime decimal(9,2), MaxTime decimal(9,2), IDShooterFK int, FOREIGN KEY (IDShooterFK) REFERENCES ShooterCollection(ID));";
            
@@ -38,10 +37,15 @@ namespace WindowsFormsApplication3
             sql += "create table Users(ID integer Primary Key not null, FirstName nvarchar(20), Surname nvarchar(40),  IDUser int, FOREIGN KEY (IDUser) REFERENCES UserPermissions(ID));";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
+
+
+            //Second 
+            sql = "insert into ASGGuns values (3, 'Ak-47', 'karabin', 44, 200, 'Gas');";
+            sql += "insert into ASGGuns values (4, 'Cz-47', 'pistolet', 12, 200, 'Sprężyna')";
+
+            SQLiteCommand command2 = new SQLiteCommand(sql, conn);
+            command2.ExecuteNonQuery();
             conn.Close();
-
-            //Second
-
 
         }
 

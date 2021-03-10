@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class menu_kowbojski : Form
     {

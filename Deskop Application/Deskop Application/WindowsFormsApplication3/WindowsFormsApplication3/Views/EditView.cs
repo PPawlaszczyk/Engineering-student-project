@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class EditView : Form
     {
@@ -16,18 +16,10 @@ namespace WindowsFormsApplication3
         {
             InitializeComponent();
         }
-
-        private void Dodaj_bron_Click(object sender, EventArgs e)
-        {
-            menu_dod_bron open_dodaj_bron = new menu_dod_bron();
-            open_dodaj_bron.Show();
-            this.Close();
-        }
-
         private void modyfikuj_bron_Click(object sender, EventArgs e)
         {
-            DBGuns open_modyf_bron = new DBGuns();
-            open_modyf_bron.Show();
+            DBGunsView formview = new DBGunsView();
+            formview.Show();
             this.Close();
         }
 
@@ -44,7 +36,7 @@ namespace WindowsFormsApplication3
 
         private void back_main_menu_Click(object sender, EventArgs e)
         {
-            menu open_menu = new menu();
+            ModesView open_menu = new ModesView();
             open_menu.Show();
             this.Close();
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     
     public partial class menu : Form

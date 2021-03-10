@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class menu_szybkostrzelny : Form
     {

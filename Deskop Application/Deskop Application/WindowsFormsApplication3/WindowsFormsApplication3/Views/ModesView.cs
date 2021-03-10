@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class ModesView : Form
     {
@@ -40,14 +40,6 @@ namespace WindowsFormsApplication3
             open_kowbojski.Show();
             this.Close();
         }
-
-        private void back_main_menu_Click(object sender, EventArgs e)
-        {
-            menu open_menu = new menu();
-            open_menu.Show();
-            this.Close();
-        }
-
         private void refleks_button_Click(object sender, EventArgs e)
         {
             Menu_refleks open_refleks = new Menu_refleks();

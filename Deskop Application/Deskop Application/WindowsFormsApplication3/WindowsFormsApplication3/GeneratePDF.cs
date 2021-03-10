@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public static class GeneratePDF
     {

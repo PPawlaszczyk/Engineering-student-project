@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class DBLogin : Form
     {
@@ -32,7 +32,7 @@ namespace WindowsFormsApplication3
 
         private void back_main_menu_Click(object sender, EventArgs e)
         {
-            menu open_menu = new menu();
+            ModesView open_menu = new ModesView();
             open_menu.Show();
             this.Close();
         }

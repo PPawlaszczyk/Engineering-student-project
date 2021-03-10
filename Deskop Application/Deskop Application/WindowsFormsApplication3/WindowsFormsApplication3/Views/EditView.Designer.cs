@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication3
+﻿namespace ShootingRange
 {
     partial class EditView
     {
@@ -28,62 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Dodaj_bron = new System.Windows.Forms.Button();
-            this.modyfikuj_bron = new System.Windows.Forms.Button();
-            this.zmien_haslo = new System.Windows.Forms.Button();
-            this.back_main_menu = new System.Windows.Forms.Button();
+            this.btnModifyDB = new System.Windows.Forms.Button();
+            this.btnModifyUsers = new System.Windows.Forms.Button();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Dodaj_bron
+            // btnModifyDB
             // 
-            this.Dodaj_bron.Location = new System.Drawing.Point(104, 115);
-            this.Dodaj_bron.Name = "Dodaj_bron";
-            this.Dodaj_bron.Size = new System.Drawing.Size(120, 40);
-            this.Dodaj_bron.TabIndex = 0;
-            this.Dodaj_bron.Text = "Dodaj nową broń";
-            this.Dodaj_bron.UseVisualStyleBackColor = true;
-            this.Dodaj_bron.Click += new System.EventHandler(this.Dodaj_bron_Click);
+            this.btnModifyDB.Location = new System.Drawing.Point(104, 122);
+            this.btnModifyDB.Name = "btnModifyDB";
+            this.btnModifyDB.Size = new System.Drawing.Size(120, 40);
+            this.btnModifyDB.TabIndex = 2;
+            this.btnModifyDB.Text = "Modyfikuj/Usuń broń";
+            this.btnModifyDB.UseVisualStyleBackColor = true;
+            this.btnModifyDB.Click += new System.EventHandler(this.modyfikuj_bron_Click);
             // 
-            // modyfikuj_bron
+            // btnModifyUsers
             // 
-            this.modyfikuj_bron.Location = new System.Drawing.Point(104, 176);
-            this.modyfikuj_bron.Name = "modyfikuj_bron";
-            this.modyfikuj_bron.Size = new System.Drawing.Size(120, 40);
-            this.modyfikuj_bron.TabIndex = 2;
-            this.modyfikuj_bron.Text = "Modyfikuj/Usuń broń";
-            this.modyfikuj_bron.UseVisualStyleBackColor = true;
-            this.modyfikuj_bron.Click += new System.EventHandler(this.modyfikuj_bron_Click);
+            this.btnModifyUsers.Location = new System.Drawing.Point(104, 193);
+            this.btnModifyUsers.Name = "btnModifyUsers";
+            this.btnModifyUsers.Size = new System.Drawing.Size(120, 40);
+            this.btnModifyUsers.TabIndex = 3;
+            this.btnModifyUsers.Text = "Dodaj/Usuń użytkownika";
+            this.btnModifyUsers.UseVisualStyleBackColor = true;
+            this.btnModifyUsers.Click += new System.EventHandler(this.zmien_haslo_Click);
             // 
-            // zmien_haslo
+            // btnMenu
             // 
-            this.zmien_haslo.Location = new System.Drawing.Point(104, 240);
-            this.zmien_haslo.Name = "zmien_haslo";
-            this.zmien_haslo.Size = new System.Drawing.Size(120, 40);
-            this.zmien_haslo.TabIndex = 3;
-            this.zmien_haslo.Text = "Dodaj/Usuń użytkownika";
-            this.zmien_haslo.UseVisualStyleBackColor = true;
-            this.zmien_haslo.Click += new System.EventHandler(this.zmien_haslo_Click);
+            this.btnMenu.Location = new System.Drawing.Point(202, 12);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(120, 40);
+            this.btnMenu.TabIndex = 12;
+            this.btnMenu.Text = "Powrót do menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.back_main_menu_Click);
             // 
-            // back_main_menu
-            // 
-            this.back_main_menu.Location = new System.Drawing.Point(202, 12);
-            this.back_main_menu.Name = "back_main_menu";
-            this.back_main_menu.Size = new System.Drawing.Size(120, 40);
-            this.back_main_menu.TabIndex = 12;
-            this.back_main_menu.Text = "Powrót do menu";
-            this.back_main_menu.UseVisualStyleBackColor = true;
-            this.back_main_menu.Click += new System.EventHandler(this.back_main_menu_Click);
-            // 
-            // edytuj
+            // EditView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 311);
-            this.Controls.Add(this.back_main_menu);
-            this.Controls.Add(this.zmien_haslo);
-            this.Controls.Add(this.modyfikuj_bron);
-            this.Controls.Add(this.Dodaj_bron);
-            this.Name = "edytuj";
+            this.Controls.Add(this.btnMenu);
+            this.Controls.Add(this.btnModifyUsers);
+            this.Controls.Add(this.btnModifyDB);
+            this.Name = "EditView";
             this.Text = "Menu Edycji";
             this.Load += new System.EventHandler(this.edytuj_Load);
             this.ResumeLayout(false);
@@ -91,10 +79,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Dodaj_bron;
-        private System.Windows.Forms.Button modyfikuj_bron;
-        private System.Windows.Forms.Button zmien_haslo;
-        private System.Windows.Forms.Button back_main_menu;
+        private System.Windows.Forms.Button btnModifyDB;
+        private System.Windows.Forms.Button btnModifyUsers;
+        private System.Windows.Forms.Button btnMenu;
     }
 }

@@ -12,17 +12,17 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Media;
-namespace WindowsFormsApplication3
+namespace ShootingRange
 {
     public partial class Menu_refleks : Form
     {
         public Menu_refleks()
         {
             InitializeComponent();
-            dataGridView1.AutoResizeColumns();
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.AutoResizeRows();
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dtgvTopScores.AutoResizeColumns();
+            dtgvTopScores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dtgvTopScores.AutoResizeRows();
+            dtgvTopScores.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             port_com.Open();       
         }
         int czas_startu = 0; // dl odczekania ms do startu
@@ -48,17 +48,12 @@ namespace WindowsFormsApplication3
             isActive_timer = false; //flag for timer ms and s 
             refleks_on = false; // flag for  math
             timer1.Stop(); //wylaczenie timera odpowiadajacego za umiesczane wartosci w tabeli i obliczania
-            Score_button.Enabled = false; //przycisk z wynikami wylaczony
-            Stop_button.Enabled = false; //przycisk z stopem wylaczony
+            btnScores.Enabled = false; //przycisk z wynikami wylaczony
+            btnStop.Enabled = false; //przycisk z stopem wylaczony
 
             SQL_combobox_fill(); // inicjalizacja sqla i stworzenie comboboxa
             fill_data_gridd_walhalla(); // sql pokazanie 10 wynikow najlepszych wypelniajac tabele
-            dataGridView1.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        }
-
-        private void back_main_menu_Click(object sender, EventArgs e)
-        {
-            open_window(); // zamyka okno i wraca do glownego menu
+            dtgvTopScores.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void start_button_Click(object sender, EventArgs e)
         {          
@@ -66,21 +61,21 @@ namespace WindowsFormsApplication3
             timer2.Start();
             refleks_on = true;
             czas_stopu = 0;
-            start_button.Enabled = false;
-            Score_button.Enabled = false;
-            weapon_combobox.Enabled = false;
-            ShooterName_textbox.Enabled = false;
+            btnStart.Enabled = false;
+            btnScores.Enabled = false;
+            tbxGun.Enabled = false;
+            txbShooterName.Enabled = false;
             File.Delete("SHOOTER_wyniki.pdf");
-            Stop_button.Enabled = true;
+            btnStop.Enabled = true;
             tryb_picked();
             clearning_array();
 
-            back_main_menu.Enabled = false;
+            btnMenu.Enabled = false;
         }
 
         private void Stop_button_Click(object sender, EventArgs e)
         {
-            start_button.Show();
+            btnStart.Show();
             uaktywnienie_programu = 3;
             port_com.Write("C");
             Ms_value_all = 0;
@@ -92,24 +87,24 @@ namespace WindowsFormsApplication3
             timer2.Stop();
 
             //przyciski i comboxoy wlaczeni
-            start_button.Enabled = true;
-            weapon_combobox.Enabled = true;
-            ShooterName_textbox.Enabled = true;
-            Stop_button.Enabled = false;
-            back_main_menu.Enabled = true;
+            btnStart.Enabled = true;
+            tbxGun.Enabled = true;
+            txbShooterName.Enabled = true;
+            btnStop.Enabled = false;
+            btnMenu.Enabled = true;
         }
 
         private void wyniki_Click(object sender, EventArgs e) //score_button
         {              
-            if (start_button.Enabled == false) //aby wykonal tylko 1 dodanie do sqla
+            if (btnStart.Enabled == false) //aby wykonal tylko 1 dodanie do sqla
             {
                 SQL_add_wallhala();
             }
             fill_data_gridd_walhalla();
-            weapon_combobox.Enabled = true;
-            ShooterName_textbox.Enabled = true;
-            start_button.Enabled = true;
-            GeneratePDF.CreatePDF(ShooterName_textbox.Text, Math.Round(reactionTimeTable.Average()/100, 2).ToString(), (reactionTimeTable.Max()/100).ToString(), (reactionTimeTable.Min()/100).ToString(), typ_picked, gunSelected);
+            tbxGun.Enabled = true;
+            txbShooterName.Enabled = true;
+            btnStart.Enabled = true;
+            GeneratePDF.CreatePDF(txbShooterName.Text, Math.Round(reactionTimeTable.Average()/100, 2).ToString(), (reactionTimeTable.Max()/100).ToString(), (reactionTimeTable.Min()/100).ToString(), typ_picked, gunSelected);
    //         GeneratePDF.CreatePDF("stormtruoper", "23", "222", "12", "pistolet", "AKJ-47");
             System.Diagnostics.Process.Start("SHOOTER_wyniki.pdf");
             clearning_array();
@@ -155,13 +150,13 @@ namespace WindowsFormsApplication3
 
                 if (czas_stopu == 1100 || uaktywnienie_programu == 3) //3 minuty 180000
                 {                
-                    start_button.Show();
+                    btnStart.Show();
                     uaktywnienie_programu = 3;
                     port_com.Write("C");
                     Ms_value_all = 0;
                     time_sec = 0;
                     time_ms = 0;
-                    Stop_button.Enabled = false;                 
+                    btnStop.Enabled = false;                 
 
                     isActive_timer = false;
                    
@@ -197,6 +192,11 @@ namespace WindowsFormsApplication3
                 wlaczponownie();//odpowiada za pomoca wylosowanej juz liczby uaktywnienie diody i programu po okreslonym czasie
             }
         }
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            open_window(); // zamyka okno i wraca do glownego menu
+
+        }
         //___________________________________________________FUNKCJA3 clearning_array__________________________________________
 
         private void clearning_array()
@@ -229,7 +229,7 @@ namespace WindowsFormsApplication3
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            ShooterName_textbox.Text = string.Concat(ShooterName_textbox.Text.Where(char.IsLetter));
+            txbShooterName.Text = string.Concat(txbShooterName.Text.Where(char.IsLetter));
         }
         //________________________________________________________FUNKCJA open_window_____________________________________________
         private void open_window() //powrot do menu glownego
@@ -251,23 +251,24 @@ namespace WindowsFormsApplication3
 
             dt.Load(reader);
 
-            weapon_combobox.ValueMember = "model_broni";
-            weapon_combobox.DisplayMember = "model_broni";
-            weapon_combobox.DataSource = dt;
+            tbxGun.ValueMember = "model_broni";
+            tbxGun.DisplayMember = "model_broni";
+            tbxGun.DataSource = dt;
 
             conn.Close();
         }
         //_____________________________________________________FUNKCJA2 final_AVG__________________________________________
         private void CalculateAVG() //liczenie sredniej strzelca w domysle jako refleks wszystkich ;oczn z tabeli
         {
-            back_main_menu.Enabled = true; //przyciski z poza funkcji, aby nie wyskakwil blad
-            Score_button.Enabled = true; //przyciski z poza funkcji, aby nie wyskakwil blad
+            btnMenu.Enabled = true; //przyciski z poza funkcji, aby nie wyskakwil blad
+            btnScores.Enabled = true; //przyciski z poza funkcji, aby nie wyskakwil blad
             uaktywnienie_programu = 0;
-        }       
+        }
+
         //__________________________________TRYBB PICKD_________________________________
         private void tryb_picked()
         {
-            gunSelected = Convert.ToString(weapon_combobox.Text);
+            gunSelected = Convert.ToString(tbxGun.Text);
 
             SqlCommand command = new SqlCommand("select typ from Bronie_ASG where model_broni='" + gunSelected + "'", conn);
             try
@@ -300,13 +301,13 @@ namespace WindowsFormsApplication3
 
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(data);
-            dataGridView1.DataSource = data;
+            dtgvTopScores.DataSource = data;
         }
        //______________________________________________________________________FUNKCJA DODAJ DO WALLHALI"______________________________________________
         private void SQL_add_wallhala() //dodanie wyniku do sqla
         {
-            string shooter = ShooterName_textbox.Text;
-            if (ShooterName_textbox.Text == "")
+            string shooter = txbShooterName.Text;
+            if (txbShooterName.Text == "")
             {
                 shooter = "Stormtrooper";
             }

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication3
+﻿namespace ShootingRange
 {
     partial class menu
     {
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.reset = new System.Windows.Forms.Button();
-            this.loguj = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox_haslo = new System.Windows.Forms.TextBox();
-            this.textBox_login = new System.Windows.Forms.TextBox();
+            this.txbPassword = new System.Windows.Forms.TextBox();
+            this.txbLogin = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // reset
@@ -45,15 +45,15 @@
             this.reset.Text = "Resetuj hasło// Instrukcja";
             this.reset.UseVisualStyleBackColor = true;
             // 
-            // loguj
+            // btnLogin
             // 
-            this.loguj.Location = new System.Drawing.Point(117, 180);
-            this.loguj.Name = "loguj";
-            this.loguj.Size = new System.Drawing.Size(120, 40);
-            this.loguj.TabIndex = 18;
-            this.loguj.Text = "Loguj";
-            this.loguj.UseVisualStyleBackColor = true;
-            this.loguj.Click += new System.EventHandler(this.loguj_Click);
+            this.btnLogin.Location = new System.Drawing.Point(117, 180);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(120, 40);
+            this.btnLogin.TabIndex = 18;
+            this.btnLogin.Text = "Loguj";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.loguj_Click);
             // 
             // label2
             // 
@@ -73,19 +73,19 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "LOGIN";
             // 
-            // textBox_haslo
+            // txbPassword
             // 
-            this.textBox_haslo.Location = new System.Drawing.Point(102, 138);
-            this.textBox_haslo.Name = "textBox_haslo";
-            this.textBox_haslo.Size = new System.Drawing.Size(156, 20);
-            this.textBox_haslo.TabIndex = 15;
+            this.txbPassword.Location = new System.Drawing.Point(102, 138);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.Size = new System.Drawing.Size(156, 20);
+            this.txbPassword.TabIndex = 15;
             // 
-            // textBox_login
+            // txbLogin
             // 
-            this.textBox_login.Location = new System.Drawing.Point(102, 81);
-            this.textBox_login.Name = "textBox_login";
-            this.textBox_login.Size = new System.Drawing.Size(156, 20);
-            this.textBox_login.TabIndex = 14;
+            this.txbLogin.Location = new System.Drawing.Point(102, 81);
+            this.txbLogin.Name = "txbLogin";
+            this.txbLogin.Size = new System.Drawing.Size(156, 20);
+            this.txbLogin.TabIndex = 14;
             // 
             // menu
             // 
@@ -93,11 +93,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 311);
             this.Controls.Add(this.reset);
-            this.Controls.Add(this.loguj);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox_haslo);
-            this.Controls.Add(this.textBox_login);
+            this.Controls.Add(this.txbPassword);
+            this.Controls.Add(this.txbLogin);
             this.Name = "menu";
             this.Text = "Menu";
             this.ResumeLayout(false);
@@ -107,11 +107,11 @@
 
         #endregion
         private System.Windows.Forms.Button reset;
-        private System.Windows.Forms.Button loguj;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox_haslo;
-        private System.Windows.Forms.TextBox textBox_login;
+        private System.Windows.Forms.TextBox txbPassword;
+        private System.Windows.Forms.TextBox txbLogin;
     }
 }
 

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="DB\Gun.cs" />
     <Compile Include="GeneratePDF.cs" />
     <Compile Include="komenda_BD.cs" />
     <Compile Include="DB\DBLogin.cs">
@@ -93,17 +94,11 @@
     <Compile Include="Views\EditView.Designer.cs">
       <DependentUpon>EditView.cs</DependentUpon>
     </Compile>
-    <Compile Include="DB\DBAddGun.cs">
+    <Compile Include="DB\DBGunsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DB\DBAddGun.Designer.cs">
-      <DependentUpon>DBAddGun.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\DBGuns.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DB\DBGuns.Designer.cs">
-      <DependentUpon>DBGuns.cs</DependentUpon>
+    <Compile Include="DB\DBGunsView.Designer.cs">
+      <DependentUpon>DBGunsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Modes\Menu_refleks.cs">
       <SubType>Form</SubType>
@@ -146,11 +141,8 @@
     <EmbeddedResource Include="Views\EditView.resx">
       <DependentUpon>EditView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DB\DBAddGun.resx">
-      <DependentUpon>DBAddGun.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\DBGuns.resx">
-      <DependentUpon>DBGuns.cs</DependentUpon>
+    <EmbeddedResource Include="DB\DBGunsView.resx">
+      <DependentUpon>DBGunsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modes\Menu_refleks.resx">
       <DependentUpon>Menu_refleks.cs</DependentUpon>
@@ -190,9 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="tlo.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
