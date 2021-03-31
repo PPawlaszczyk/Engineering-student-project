@@ -24,7 +24,7 @@ namespace ShootingRange
 
         private void back_main_menu_Click(object sender, EventArgs e)
         {
-            menu open_menu = new menu();
+            Workspace open_menu = new Workspace();
             open_menu.Show();
             this.Close();
         }

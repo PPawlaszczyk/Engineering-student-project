@@ -199,6 +199,7 @@
             this.btnAdd.TabIndex = 29;
             this.btnAdd.Text = "Dodaj";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnLogout
             // 

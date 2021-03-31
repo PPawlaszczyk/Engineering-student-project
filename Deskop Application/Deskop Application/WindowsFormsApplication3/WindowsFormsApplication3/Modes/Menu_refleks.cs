@@ -234,7 +234,7 @@ namespace ShootingRange
         //________________________________________________________FUNKCJA open_window_____________________________________________
         private void open_window() //powrot do menu glownego
         {
-            menu open_menu = new menu();
+            Workspace open_menu = new Workspace();
             open_menu.Show();
             this.Close();
         }

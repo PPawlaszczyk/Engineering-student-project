@@ -21,9 +21,9 @@ namespace ShootingRange
         {
             InitializeComponent();
             
-            lstGuns = DBSelectGuns();     
-            lbxModels.DataSource = new BindingList<string>(lstGuns.Select(x=> x.Model).ToList());
-            lbxModels.DisplayMember = "Model";
+            lstGuns = DBSelectGuns();
+            BindList(lstGuns);
+
         }
         private List<Gun> DBSelectGuns()
         {
@@ -57,35 +57,32 @@ namespace ShootingRange
         
         private void modyfikuj_przycisk_Click(object sender, EventArgs e)
         {
-
-            //if (model_broni_przenies.Text == "" || FPS_broni_przenies.Text == "" || Pojemnosc_broni_przenies.Text == "" || typ_broni_przenies.Text == "" || naped_broni_przenies.Text == "")
-            //{
-            //    MessageBox.Show("Wypełnij okienka");
-            //}
-            //else
-            //{
-            //    SqlConnection conn = new SqlConnection();
-            //    conn.ConnectionString = @"server=G510-Komputer\dazzyl; trusted_connection=false; database=ASG; User ID=sa; Password=lolek1234";
-            //    SqlCommand command = new SqlCommand();
-            //    command.Connection = conn;
-            //    command.CommandText = "delete from bronie_ASG where model_broni = '" + model_broni.Text + "'" + "Insert INTO Bronie_ASG VALUES('" + model_broni_przenies.Text + "','" + typ_broni_przenies.Text + "','" + FPS_broni_przenies.Text + "','" + Pojemnosc_broni_przenies.Text + "','" + naped_broni_przenies.Text + " ')";
-            //    DataTable data = new DataTable();
-            //    SqlDataAdapter adapter = new SqlDataAdapter(command);
-            //    adapter.Fill(data);
-            //    MessageBox.Show("Zmodyfikowano!");
-            //    DBGunsView open_modyf_bron = new DBGunsView();
-            //    open_modyf_bron.Show();
-            //    this.Close();
-            //}
+            foreach(var item in lstGuns)
+            {
+                if(lstGuns.Select(x => x.Model == selectedItem.Model)!=null)
+                {
+                    item.Model = txbModel.Text;
+                    item.Capacity = int.Parse(txbCapacity.Text);
+                    item.FPS = int.Parse(txbFPS.Text);
+                    item.PowerSource = txbPowerSource.Text;
+                    item.Type = txbType.Text;
+                    BindList(lstGuns);
+                    break;
+                }
+            }
         }   
         private void lbxModels_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedItem = lstGuns.FirstOrDefault(x => x.Model == lbxModels.SelectedItem.ToString());         
-            txbType.Text = selectedItem.Type;
-            txbCapacity.Text = $"{selectedItem.Capacity}";
-            txbFPS.Text = $"{selectedItem.FPS}";
-            txbModel.Text = selectedItem.Model;
-            txbPowerSource.Text = selectedItem.PowerSource;
+            if (lbxModels.SelectedItem != null)
+            {
+                Gun tmprGun = (Gun)lbxModels.SelectedItem;
+                selectedItem = lstGuns.FirstOrDefault(x => x.ID == tmprGun.ID);
+                txbType.Text = selectedItem.Type;
+                txbCapacity.Text = $"{selectedItem.Capacity}";
+                txbFPS.Text = $"{selectedItem.FPS}";
+                txbModel.Text = selectedItem.Model;
+                txbPowerSource.Text = selectedItem.PowerSource;
+            }
         }
         private void txbModel_TextChanged(object sender, EventArgs e)
         {
@@ -114,10 +111,22 @@ namespace ShootingRange
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            lstGuns.Remove(selectedItem);
+            if (lstGuns.Count() > 0) lstGuns.Remove(selectedItem);
+            if(lstGuns.Count() ==0) ClearTextboxes();
+            
+            if (lbxModels.SelectedIndex>0) lbxModels.SelectedIndex = lbxModels.SelectedIndex - 1;
+            BindList(lstGuns);
         }
         private void txbSearch_TextChanged(object sender, EventArgs e)
         {
+            var tmplist = new List<Gun>();
+            if (lbxModels.Items.Count > 0) lbxModels.SelectedItems.Clear();
+            foreach (var item in lstGuns)
+            {
+                if (item.Model.ToLower().Contains(txbSearch.Text)) tmplist.Add(item);
+            }
+            BindList(tmplist);
+
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -125,6 +134,39 @@ namespace ShootingRange
             ModesView open_menu = new ModesView();
             open_menu.Show();
             this.Close();
+        }
+
+        void ClearTextboxes()
+        {
+            selectedItem.PowerSource = "";
+            selectedItem.Type = "";
+            selectedItem.FPS = null;
+            selectedItem.Model = "";
+            selectedItem.Capacity = null;
+            txbModel.Clear();
+            txbCapacity.Clear();
+            txbFPS.Clear();
+            txbModel.Clear();
+            txbPowerSource.Clear();
+            txbType.Clear();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            lstGuns.Add(new Gun { Model = "--Dodaj--" });
+            BindList(lstGuns);
+        }
+
+        private void BindList(List<Gun> lstInput)
+        {
+            lbxModels.DataSource = new BindingList<Gun>(lstInput);
+            lbxModels.DisplayMember = "Model";
+            lbxModels.ValueMember = "ID";
+            lbxModels.ValueMember = "Type";
+            lbxModels.ValueMember = "Model";
+            lbxModels.ValueMember = "FPS";
+            lbxModels.ValueMember = "Capacity";
+            lbxModels.ValueMember = "PowerSource";
         }
     }
 }
